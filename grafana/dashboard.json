@@ -1,0 +1,118 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": {"list": []},
+  "description": "ResourceESGAgent Multi-Resource Dashboard: timber/amber/ore ESG risk metrics",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "id": 1,
+      "title": "Risks by Resource Type",
+      "type": "piechart",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus"},
+          "expr": "sum(resource_esg_profiles_total{resource_type=~\"$resource_type\"}) by (resource_type, level)",
+          "legendFormat": "{{resource_type}} - {{level}}"
+        }
+      ],
+      "options": {
+        "legend": {"displayMode": "table", "placement": "right"},
+        "pieType": "donut"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Hack Detection Rate (24h)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus"},
+          "expr": "rate(resource_hack_shipments_detected{resource_type=~\"$resource_type\"}[24h])",
+          "legendFormat": "{{resource_type}} hacks/h"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "ESG Risk Level Distribution",
+      "type": "bargauge",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus"},
+          "expr": "sum(resource_esg_profiles_total{level=~\"HIGH|CRITICAL\", resource_type=~\"$resource_type\"}) by (level)",
+          "legendFormat": "{{level}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 1},
+              {"color": "orange", "value": 3},
+              {"color": "red", "value": 5}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "Total Flagged Shipments (all time)",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 6, "x": 12, "y": 8},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus"},
+          "expr": "sum(resource_hack_shipments_detected{resource_type=~\"$resource_type\"})",
+          "legendFormat": "Total hacks"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Profiles Computed Today",
+      "type": "stat",
+      "gridPos": {"h": 4, "w": 6, "x": 18, "y": 8},
+      "targets": [
+        {
+          "datasource": {"type": "prometheus"},
+          "expr": "increase(resource_esg_profiles_total{resource_type=~\"$resource_type\"}[24h])",
+          "legendFormat": "Profiles/day"
+        }
+      ]
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": ["esg", "resource", "ukraine", "auditorsec"],
+  "templating": {
+    "list": [
+      {
+        "current": {"selected": true, "text": ["All"], "value": ["$__all"]},
+        "datasource": {"type": "prometheus"},
+        "definition": "label_values(resource_esg_profiles_total, resource_type)",
+        "includeAll": true,
+        "multi": true,
+        "name": "resource_type",
+        "query": "label_values(resource_esg_profiles_total, resource_type)",
+        "type": "query",
+        "label": "Resource Type"
+      }
+    ]
+  },
+  "time": {"from": "now-7d", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "ResourceESG Multi-Dashboard",
+  "uid": "resource-esg-v1",
+  "version": 1
+}
