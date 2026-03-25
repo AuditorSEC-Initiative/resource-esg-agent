@@ -1,0 +1,59 @@
+# ResourceESGAgent Helm values
+# Override with: helm install resource-esg-agent ./k8s -f custom-values.yaml
+
+replicaCount: 2
+
+image:
+  repository: ghcr.io/auditorsec-initiative/resource-esg-agent
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: esg.auditorsec.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: esg-tls
+      hosts:
+        - esg.auditorsec.com
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+
+env:
+  DATABASE_URL: ""
+
+postgresql:
+  enabled: true
+  auth:
+    username: esg
+    password: esg
+    database: esg
+
+grafana:
+  enabled: true
+  adminPassword: admin
+
+prometheus:
+  enabled: true
