@@ -1,0 +1,17 @@
+enterprise_edrpou,resource_type,date,origin_station,destination,declared_type,volume_kg,buyer_legal_entity,expected_flag
+98765432,amber,2025-10-20,Klesiv,PL-Medika,scrap,45.2,Ghost Amber LTD,amber_hack
+98765432,amber,2025-10-21,Klesiv,PL-Medika,scrap,12.8,Ghost Amber LTD,amber_hack
+98765432,amber,2025-10-22,Klesiv,DE-Hamburg,mineral_waste,88.5,Baltic Trade GmbH,amber_hack
+98765432,amber,2025-10-23,Klesiv,LT-Klaipeda,scrap,2.1,EuroAmber OOO,amber_hack
+11122233,timber,2025-10-21,Rivne,SK-Krakow,firewood,2.2,Forest Proxy SRL,timber_hack
+11122233,timber,2025-10-22,Rivne,PL-Medika,firewood,1.9,WoodTrade PL,timber_hack
+11122233,timber,2025-10-23,Korosten,HU-Budapest,waste_wood,0.8,Timber Shell Ltd,timber_hack
+11122233,timber,2025-10-24,Rivne,SK-Krakow,firewood,2.5,Forest Proxy SRL,timber_hack
+33344455,ore,2025-10-22,Zhytomyr,UA-Kyiv,construction_sand,2500,Titan Shell GmbH,ore_hack
+33344455,ore,2025-10-23,Irpin,PL-Rzeszow,gravel,1800,EuroMin LLC,ore_hack
+33344455,ore,2025-10-24,Zhytomyr,DE-Munich,construction_sand,4200,Strategic Min GmbH,ore_hack
+44455566,timber,2025-10-25,Kharkiv,PL-Przemysl,firewood,1.85,LegitWood Ltd,timber_hack
+55566677,amber,2025-10-26,Sarny,PL-Medika,scrap,0.5,SmallTrade Sp,amber_hack
+66677788,ore,2025-10-27,Kryvyi Rih,SK-Kosice,gravel,3100,Steel Resources AS,ore_hack
+77788899,timber,2025-10-28,Korosten,AT-Vienna,firewood,2.1,AlpineWood GmbH,timber_hack
+88899900,amber,2025-10-29,Klesiv,LV-Riga,scrap,38.9,Baltic Gems Ltd,amber_hack
