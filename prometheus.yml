@@ -1,0 +1,27 @@
+# Prometheus scrape config for ResourceESGAgent
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: resource-esg-agent
+    env: production
+
+scrape_configs:
+  # ResourceESGAgent FastAPI metrics
+  - job_name: resource_esg_api
+    static_configs:
+      - targets: ['api:8000']
+    metrics_path: /api/v1/esg/resource/metrics
+    scrape_interval: 30s
+    scrape_timeout: 10s
+
+  # Prometheus self-monitoring
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Node exporter (optional, if deployed)
+  - job_name: node
+    static_configs:
+      - targets: ['node-exporter:9100']
+    honor_labels: true
