@@ -1,0 +1,17 @@
+apiVersion: v2
+name: resource-esg-agent
+description: Helm chart for ResourceESGAgent - Universal ESG risk detection for timber/amber/ore
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+keywords:
+  - esg
+  - resource-integrity
+  - ukraine
+  - auditorsec
+  - uhip
+home: https://github.com/AuditorSEC-Initiative/resource-esg-agent
+maintainers:
+  - name: AuditorSEC Initiative
+    email: info@auditorsec.com
+    url: https://github.com/AuditorSEC-Initiative
